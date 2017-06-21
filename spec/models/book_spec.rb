@@ -290,3 +290,40 @@ Rspec.describe Book do
     end
   end
 end
+
+
+# -----------------------------------------------------------------------------
+# Should not update context value
+# Not good:
+
+# Case 1
+RSpec.describe Book do
+  describe '#reserve' do
+    subject { book.reserve }
+    let(:book) { Book.new(avalilable: true) }
+
+    context 'when the book is not available' do
+      before do
+        book.update(avalilable: false)
+      end
+
+      # ...
+    end
+  end
+end
+
+# Case 2
+RSpec.describe Book do
+  describe '#reserve' do
+    subject { book.reserve }
+    let(:book) { Book.new(avalilable: available, country: country) }
+    let(:available) { true }
+    let(:country) { :jp }
+
+    context 'when the book is not available' do
+      let(:available) { false }
+
+      # ...
+    end
+  end
+end
