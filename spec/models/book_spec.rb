@@ -263,3 +263,30 @@ RSpec.describe Book do
     end
   end
 end
+
+
+# Expect change
+# Not Good:
+Rspec.describe Book do
+  describe '#reserve' do
+    subject(:reserve_book) { book.reserve(user) }
+    let!(:user) { User.new(remaining_count: 3) }
+
+    it 'decrease remaining count by 1' do
+      reserve_book
+      expect(user.remaining_count).to eq 2
+    end
+  end
+end
+
+# Better
+Rspec.describe Book do
+  describe '#reserve' do
+    subject(:reserve_book) { book.reserve(user) }
+    let!(:user) { User.new(remaining_count: 3) }
+
+    it 'decrease remaining count by 1' do
+      expect { reserve_book }.to change { user.remaining_count }.by(-1)
+    end
+  end
+end
