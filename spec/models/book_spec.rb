@@ -245,8 +245,8 @@ RSpec.describe Book do
     context 'when user has admin role' do
       let(:user) { User.new(role: [:admin]) }
 
-      it "reserve and decrease remaingins and has no due date" do
-        expect { reserve_book }.not_to change { user.remainings_count }
+      it "reserve and decrease remaingin count and has no due date" do
+        expect { reserve_book }.not_to change { user.remaining_count }
         expect(book.reserved_user).to eq user
         expect(book.reservation.due_date.present?).to be_falsey
       end
@@ -255,8 +255,8 @@ RSpec.describe Book do
     context 'when user has normal role' do
       let(:user) { User.new(role: [:normal]) }
 
-      it "reserve and decrease remaingins and has no due date" do
-        expect { reserve_book }.to change { user.remainings_count }.by(1)
+      it "reserve and decrease remaingin count and has no due date" do
+        expect { reserve_book }.to change { user.remaining_count }.by(1)
         expect(book.reserved_user).to eq user
         expect(book.reservation.due_date.present?).to be_truthy
       end
