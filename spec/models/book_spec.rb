@@ -373,3 +373,14 @@ RSpec.describe Book do
     end
   end
 end
+
+
+
+# -----------------------------------------------------------------------------
+# Should not use “should” in example names
+# Not good:
+it 'should be reserved'
+
+
+# Better
+it 'is reserved'
