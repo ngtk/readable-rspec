@@ -2,7 +2,7 @@
 # Not good:
 RSpec.describe Book do
   describe '#reserve' do
-    it 'raises alredy reserved error when already reserved' do
+    it 'raises already reserved error when already reserved' do
       # ...
     end
 
@@ -16,7 +16,7 @@ end
 RSpec.describe Book do
   describe '#reserve' do
     context 'when already reserved' do
-      it 'raises alredy reserved error' do
+      it 'raises already reserved error' do
         # ...
       end
     end
