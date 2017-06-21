@@ -342,3 +342,34 @@ RSpec.describe Book do
     end
   end
 end
+
+
+# -----------------------------------------------------------------------------
+# Write expectations at a high level
+# Not good:
+RSpec.describe Book do
+  describe '#reserve' do
+    subject { book.reserve }
+    let(:book) { Book.new(available: available) }
+
+    context 'when book.avaiable == false' do
+      let(:available) { false }
+
+      # ...
+    end
+  end
+end
+
+# Better
+RSpec.describe Book do
+  describe '#reserve' do
+    subject { book.reserve }
+    let(:book) { Book.new(available: available) }
+
+    context 'when the book can be reserved' do
+      let(:available) { false }
+
+      # ...
+    end
+  end
+end
