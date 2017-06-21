@@ -98,6 +98,7 @@ end
 # Use let
 # Not good:
 
+# Case 1
 RSpec.describe Book do
   describe '#reserve' do
     context 'when the book is already reserved' do
@@ -111,6 +112,7 @@ RSpec.describe Book do
   end
 end
 
+# Case 2
 RSpec.describe Book do
   describe '#reserve' do
     context 'when the book is already reserved' do
