@@ -352,7 +352,7 @@ RSpec.describe Book do
     subject { book.reserve }
     let(:book) { Book.new(available: available) }
 
-    context 'when book.avaiable == false' do
+    context 'when book.available == false' do
       let(:available) { false }
 
       # ...
