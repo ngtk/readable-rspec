@@ -37,12 +37,12 @@ RSpec.describe Book do
   describe '#reserve' do
     context 'when already reserved' do
       let(:reserved) { true }
-      context 'when the users reserversion limit is exceeded' do
+      context 'when the users reservation limit is exceeded' do
         let(:exceeded) { true }
         # ...
       end
 
-      context 'when the users reserversion limit is not exceeded' do
+      context 'when the users reservation limit is not exceeded' do
         let(:exceeded) { false }
         # ...
       end
@@ -50,12 +50,12 @@ RSpec.describe Book do
 
     context 'the book is available' do
       let(:reserved) { false }
-      context 'when the users reserversion limit is exceeded' do
+      context 'when the users reservation limit is exceeded' do
         let(:exceeded) { true }
         # ...
       end
 
-      context 'when the users reserversion limit is not exceeded' do
+      context 'when the users reservation limit is not exceeded' do
         let(:exceeded) { false }
         # ...
       end
@@ -67,25 +67,25 @@ end
 
 RSpec.describe Book do
   describe '#reserve' do
-    context 'when already reserved and the user reserversion limit is exceeded' do
+    context 'when already reserved and the user reservation limit is exceeded' do
       let(:reserved) { true }
       let(:exceeded) { true }
       # ...
     end
 
-    context 'when already reserved and the users reserversion limit is not exceeded' do
+    context 'when already reserved and the users reservation limit is not exceeded' do
       let(:reserved) { true }
       let(:exceeded) { false }
       # ...
     end
 
-    context 'the book is available and the user reserversion limit is exceeded' do
+    context 'the book is available and the user reservation limit is exceeded' do
       let(:reserved) { false }
       let(:exceeded) { true }
       # ...
     end
 
-    context 'the book is available and the user has enough reserversion limit' do
+    context 'the book is available and the user has enough reservation limit' do
       let(:reserved) { false }
       let(:exceeded) { false }
       # ...
