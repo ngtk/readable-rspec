@@ -92,3 +92,49 @@ RSpec.describe Book do
     end
   end
 end
+
+
+# -----------------------------------------------------------------------------
+# Use let
+# Not good:
+
+RSpec.describe Book do
+  describe '#reserve' do
+    context 'when the book is already reserved' do
+      it 'returns falsey value' do
+        reserved = true
+        book = Book.new(reserved: reserved)
+        book.reserve
+        expect(book.reserved).to be_truthy
+      end
+    end
+  end
+end
+
+RSpec.describe Book do
+  describe '#reserve' do
+    before do
+      @reserved = true
+      @book = Book.new(reserved: reserved)
+      @book.reserve
+    end
+
+    it 'returns falsey value' do
+      expect(@book.reserve).to be_falsey
+    end
+  end
+end
+
+
+# Good:
+RSpec.describe Book do
+  describe '#reserve' do
+    subject { book.reserve }
+    let(:book) { Book.new(reserved: reserved) }
+    let(:reserved) { true }
+
+    it 'returns falsey value' do
+      is_expected.to be_falsey
+    end
+  end
+end
