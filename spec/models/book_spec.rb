@@ -113,14 +113,16 @@ end
 
 RSpec.describe Book do
   describe '#reserve' do
-    before do
-      @reserved = true
-      @book = Book.new(reserved: reserved)
-      @book.reserve
-    end
+    context 'when the book is already reserved' do
+      before do
+        @reserved = true
+        @book = Book.new(reserved: reserved)
+        @book.reserve
+      end
 
-    it 'returns falsey value' do
-      expect(@book.reserve).to be_falsey
+      it 'returns falsey value' do
+        expect(@book.reserve).to be_falsey
+      end
     end
   end
 end
@@ -131,10 +133,13 @@ RSpec.describe Book do
   describe '#reserve' do
     subject { book.reserve }
     let(:book) { Book.new(reserved: reserved) }
-    let(:reserved) { true }
 
-    it 'returns falsey value' do
-      is_expected.to be_falsey
+    context 'when the book is already reserved' do
+      let(:reserved) { true }
+
+      it 'returns falsey value' do
+        is_expected.to be_falsey
+      end
     end
   end
 end
