@@ -145,3 +145,65 @@ RSpec.describe Book do
     end
   end
 end
+
+
+# -----------------------------------------------------------------------------
+# Use subject and named subject
+# Not good:
+RSpec.describe Book do
+  describe '#reserve' do
+    let(:book) { Book.new(reserved: false) }
+    let(:user) { User.new }
+
+    it 'returns truthy value' do
+      expect(book.reserve(user)).to be_truthy
+    end
+
+    it 'reserved user returns currect user' do
+      book.reserve
+      expect(book.reserved_user).to eq user
+    end
+  end
+end
+
+# Better
+RSpec.describe Book do
+  describe '#reserve' do
+    subject { book.reserve }
+
+    let(:book) { Book.new(reserved: false) }
+    let(:user) { User.new }
+
+    it 'returns truthy value' do
+      is_expected.to be_truthy
+    end
+
+    it 'reserved user returns currect user' do
+      subject
+      expect(book.reserved_user).to eq user
+    end
+  end
+end
+
+# Good
+RSpec.describe Book do
+  describe '#reserve' do
+    subject(:reserve_book) { book.reserve }
+
+    let(:book) { Book.new(reserved: false) }
+    let(:user) { User.new }
+
+    it 'returns truthy value' do
+      is_expected.to be_truthy
+    end
+
+    it 'reserved user returns currect user' do
+      reserve_book
+      expect(book.reserved_user).to eq user
+    end
+
+    it 'number of books that the user reserved changes by 1 ' do
+      expect { reserve_book }.to change { user.reserved_books.count }.by(1)
+    end
+  end
+end
