@@ -160,7 +160,7 @@ RSpec.describe Book do
     end
 
     it 'reserved user returns correct user' do
-      book.reserve
+      book.reserve(user)
       expect(book.reserved_user).to eq user
     end
   end
