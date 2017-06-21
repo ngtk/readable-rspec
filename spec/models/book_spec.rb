@@ -105,7 +105,7 @@ RSpec.describe Book do
         reserved = true
         book = Book.new(reserved: reserved)
         book.reserve
-        expect(book.reserved).to be_truthy
+        expect(book.reserved).to be_falsey
       end
     end
   end
