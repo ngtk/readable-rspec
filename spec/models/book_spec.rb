@@ -207,3 +207,59 @@ RSpec.describe Book do
     end
   end
 end
+
+# -----------------------------------------------------------------------------
+# Reserved DRY
+# Not good:
+RSpec.shared_examples 'reservation' do |decrease_by:, has_due_date:|
+  it "reserve the book and decrease remainings by -#{decrease_by}" do
+    expect { reserve_book }.to change { user.remainings_count }.by(- decrease_by)
+    expect(book.reserved_user).to eq user
+    expect(book.reservation.due_date.present?).to be has_due_date
+  end
+end
+
+RSpec.describe Book do
+  describe '#reserve' do
+    subject(:reserve_book) { book.reserve }
+    let(:book) { Book.new }
+
+    context 'when user has admin role' do
+      let(:user) { User.new(role: [:admin]) }
+      it_bahaves_like "reservation", decrease_by: 0, has_due_date: false
+    end
+
+    context 'when user has normal role' do
+      let(:user) { User.new(role: [:normal]) }
+      it_bahaves_like "reservation", decrease_by: 1, has_due_date: true
+    end
+  end
+end
+
+# Good:
+RSpec.describe Book do
+  describe '#reserve' do
+    subject(:reserve_book) { book.reserve }
+    let(:book) { Book.new }
+
+    context 'when user has admin role' do
+      let(:user) { User.new(role: [:admin]) }
+
+      it "reserve and decrease remaingins and has no due date" do
+        expect { reserve_book }.not_to change { user.remainings_count }
+        expect(book.reserved_user).to eq user
+        expect(book.reservation.due_date.present?).to be_falsey
+      end
+    end
+
+    context 'when user has normal role' do
+      let(:user) { User.new(role: [:normal]) }
+
+      it "reserve and decrease remaingins and has no due date" do
+        expect { reserve_book }.to change { user.remainings_count }.by(1)
+        expect(book.reserved_user).to eq user
+        expect(book.reservation.due_date.present?).to be_truthy
+      end
+    end
+  end
+end
