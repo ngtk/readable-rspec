@@ -327,3 +327,18 @@ RSpec.describe Book do
     end
   end
 end
+
+
+# Better
+RSpec.describe Book do
+  describe '#reserve' do
+    subject { book.reserve }
+    let(:book) { Book.new(avalilable: available, country: :jp) }
+
+    context 'when the book is not available' do
+      let(:available) { false }
+
+      # ...
+    end
+  end
+end
