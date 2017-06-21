@@ -202,7 +202,7 @@ RSpec.describe Book do
       expect(book.reserved_user).to eq user
     end
 
-    it 'number of books that the user reserved changes by 1 ' do
+    it 'number of books that the user reserved increases by 1' do
       expect { reserve_book }.to change { user.reserved_books.count }.by(1)
     end
   end
