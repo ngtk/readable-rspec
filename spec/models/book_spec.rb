@@ -304,7 +304,7 @@ RSpec.describe Book do
 
     context 'when the book is not available' do
       before do
-        book.update(avalilable: false)
+        book.update(available: false)
       end
 
       # ...
@@ -316,7 +316,7 @@ end
 RSpec.describe Book do
   describe '#reserve' do
     subject { book.reserve }
-    let(:book) { Book.new(avalilable: available, country: country) }
+    let(:book) { Book.new(available: available, country: country) }
     let(:available) { true }
     let(:country) { :jp }
 
@@ -333,7 +333,7 @@ end
 RSpec.describe Book do
   describe '#reserve' do
     subject { book.reserve }
-    let(:book) { Book.new(avalilable: available, country: :jp) }
+    let(:book) { Book.new(available: available, country: :jp) }
 
     context 'when the book is not available' do
       let(:available) { false }
