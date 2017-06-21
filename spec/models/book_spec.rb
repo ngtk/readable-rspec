@@ -159,7 +159,7 @@ RSpec.describe Book do
       expect(book.reserve(user)).to be_truthy
     end
 
-    it 'reserved user returns currect user' do
+    it 'reserved user returns correct user' do
       book.reserve
       expect(book.reserved_user).to eq user
     end
@@ -178,7 +178,7 @@ RSpec.describe Book do
       is_expected.to be_truthy
     end
 
-    it 'reserved user returns currect user' do
+    it 'reserved user returns correct user' do
       subject
       expect(book.reserved_user).to eq user
     end
@@ -197,7 +197,7 @@ RSpec.describe Book do
       is_expected.to be_truthy
     end
 
-    it 'reserved user returns currect user' do
+    it 'reserved user returns correct user' do
       reserve_book
       expect(book.reserved_user).to eq user
     end
